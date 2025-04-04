@@ -14,25 +14,47 @@ export default function GrumpyShibaLanding() {
         fontFamily: "system-ui, sans-serif",
       }}>
 
-      <img
-        src="https://teal-efficient-beaver-393.mypinata.cloud/ipfs/bafkreiclbxwb5rfvz5dy2rg5ava6nhvbt5uxfn7x55dd7erpfmrerxs5pq"
-        alt="GrumpyShiba Logo"
-        style={{ width: '220px', height: '220px', borderRadius: '9999px', marginBottom: '1rem' }}
-      />
+      <div style={{ position: 'relative', display: 'inline-block' }}>
+        <div
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '300px',
+            height: '300px',
+            background: 'radial-gradient(circle, rgba(255,0,122,0.4), transparent 70%)',
+            filter: 'blur(40px)',
+            zIndex: 0,
+            animation: 'glow 6s ease-in-out infinite',
+          }}
+        ></div>
+        <img
+          src="https://teal-efficient-beaver-393.mypinata.cloud/ipfs/bafkreiclbxwb5rfvz5dy2rg5ava6nhvbt5uxfn7x55dd7erpfmrerxs5pq"
+          alt="GrumpyShiba Logo"
+          style={{ width: '280px', height: 'auto', position: 'relative', zIndex: 1, animation: 'zoomIn 10s ease-in-out infinite' }}
+        />
+      </div>
 
-      <h1 style={{ fontSize: "3.5rem", color: "#fff", textShadow: "2px 2px 10px #000" }}>
+      <h1 style={{ fontSize: "4rem", color: "#fff", marginTop: '1.5rem', textShadow: "0 0 15px #ff00cc" }}>
         $GSHIBA
       </h1>
       <p style={{ fontSize: "1.4rem", maxWidth: "700px", margin: "1rem auto", color: "#f0f0f0" }}>
-        Solana's most grumpy shiba. A meme token with attitude, that rewards you every hour in SOL if you keep him with you.
+        He’s angry. He’s rich. He’s rewarding. <br /> Hourly SOL drops for the faithful.
       </p>
+
+      <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+        <span style={{ background: '#111', padding: '0.5rem 1rem', borderRadius: '999px', border: '1px solid #ff00cc', boxShadow: '0 0 10px #ff00cc' }}>🚀 Fair Launch</span>
+        <span style={{ background: '#111', padding: '0.5rem 1rem', borderRadius: '999px', border: '1px solid #00ffee', boxShadow: '0 0 10px #00ffee' }}>💸 Hourly SOL Rewards</span>
+        <span style={{ background: '#111', padding: '0.5rem 1rem', borderRadius: '999px', border: '1px solid #ffff00', boxShadow: '0 0 10px #ffff00' }}>😡 100% Grumpy — 0% Mercy</span>
+      </div>
 
       <div
         style={{
           backgroundColor: "rgba(0,0,0,0.4)",
           padding: "1.5rem",
           border: "1px solid #fff",
-          marginTop: "2rem",
+          marginTop: "2.5rem",
           borderRadius: "10px",
           boxShadow: "0 0 15px rgba(255,255,255,0.2)",
         }}>
@@ -63,8 +85,7 @@ export default function GrumpyShibaLanding() {
             fontWeight: "bold",
             fontSize: "1rem",
             borderRadius: "8px",
-            cursor: "not-allowed",
-            opacity: 0.8,
+            animation: 'pulseBtn 2s infinite',
             boxShadow: "0 0 10px rgba(255,255,255,0.5)"
           }}
           disabled
@@ -79,7 +100,21 @@ export default function GrumpyShibaLanding() {
           50% { background-position: 100% 50%; }
           100% { background-position: 0% 50%; }
         }
+        @keyframes glow {
+          0%, 100% { opacity: 0.4; }
+          50% { opacity: 1; }
+        }
+        @keyframes zoomIn {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.05); }
+        }
+        @keyframes pulseBtn {
+          0% { box-shadow: 0 0 10px rgba(255,255,255,0.3); }
+          50% { box-shadow: 0 0 25px rgba(255,255,255,0.8); }
+          100% { box-shadow: 0 0 10px rgba(255,255,255,0.3); }
+        }
       `}</style>
     </div>
   );
 }
+
