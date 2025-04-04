@@ -14,6 +14,7 @@ export default function GrumpyShibaLanding() {
         fontFamily: "system-ui, sans-serif",
       }}>
 
+      {/* LOGO SECTION */}
       <div style={{ position: 'relative', display: 'inline-block' }}>
         <div
           style={{
@@ -43,12 +44,14 @@ export default function GrumpyShibaLanding() {
         He’s angry. He’s rich. He’s rewarding. <br /> Hourly SOL drops for the faithful.
       </p>
 
+      {/* BADGES */}
       <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
         <span style={{ background: '#111', padding: '0.5rem 1rem', borderRadius: '999px', border: '1px solid #ff00cc', boxShadow: '0 0 10px #ff00cc' }}>🚀 Fair Launch</span>
         <span style={{ background: '#111', padding: '0.5rem 1rem', borderRadius: '999px', border: '1px solid #00ffee', boxShadow: '0 0 10px #00ffee' }}>💸 Hourly SOL Rewards</span>
         <span style={{ background: '#111', padding: '0.5rem 1rem', borderRadius: '999px', border: '1px solid #ffff00', boxShadow: '0 0 10px #ffff00' }}>😡 100% Grumpy — 0% Mercy</span>
       </div>
 
+      {/* TOKEN INFO */}
       <div
         style={{
           backgroundColor: "rgba(0,0,0,0.4)",
@@ -66,6 +69,7 @@ export default function GrumpyShibaLanding() {
         </code>
       </div>
 
+      {/* LINKS */}
       <div style={{ marginTop: "2.5rem" }}>
         <h2 style={{ fontSize: "1.7rem", marginBottom: "1rem" }}>Links</h2>
         <ul style={{ listStyle: "none", padding: 0, lineHeight: "2.2" }}>
@@ -76,6 +80,7 @@ export default function GrumpyShibaLanding() {
         </ul>
       </div>
 
+      {/* BUY BUTTON */}
       <div style={{ marginTop: '3rem' }}>
         <button
           style={{
@@ -94,6 +99,34 @@ export default function GrumpyShibaLanding() {
         </button>
       </div>
 
+      {/* WHITEPAPER SECTION */}
+      <div style={{ marginTop: '4rem', backgroundColor: 'rgba(0,0,0,0.4)', padding: '2rem', borderRadius: '12px', border: '1px solid #fff', maxWidth: '700px', marginLeft: 'auto', marginRight: 'auto' }}>
+        <h2 style={{ fontSize: '2rem', color: '#fff', textShadow: '0 0 10px #fff' }}>📘 Whitepaper</h2>
+        <p style={{ margin: '1rem 0', fontSize: '1.1rem', color: '#eee' }}>
+          Dive into the full vision, strategy, and the power of GrumpyShiba. Know what drives the most grumpy dog on Solana.
+        </p>
+        <a
+          href="https://teal-efficient-beaver-393.mypinata.cloud/ipfs/bafybeibcphgogepckjiupswtue4ddhgr4uqr36en4ovqcmb5lxgiu4kasa"
+          target="_blank"
+          style={{
+            display: 'inline-block',
+            backgroundColor: '#00ffee',
+            color: '#000',
+            fontWeight: 'bold',
+            padding: '0.75rem 1.5rem',
+            borderRadius: '8px',
+            textDecoration: 'none',
+            boxShadow: '0 0 10px #00ffee',
+            transition: 'transform 0.3s ease',
+          }}
+          onMouseOver={(e) => (e.target.style.transform = 'scale(1.05)')}
+          onMouseOut={(e) => (e.target.style.transform = 'scale(1)')}
+        >
+          Read the Full Plan
+        </a>
+      </div>
+
+      {/* STYLES */}
       <style>{`
         @keyframes pulseBG {
           0% { background-position: 0% 50%; }
