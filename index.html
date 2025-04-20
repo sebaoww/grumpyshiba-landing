@@ -1,12 +1,10 @@
-
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>GrumpyShiba Coin ($GSHIBA)</title>
-<style>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GrumpyShiba Coin ($GSHIBA)</title>
+  <style>
     body {
       background-color: #0a0000;
       color: #ff3300;
@@ -47,7 +45,8 @@
       color: white;
       text-decoration: none;
       font-weight: bold;
-      border-radius: 5px; transition: 0.2s;
+      border-radius: 5px;
+      transition: 0.2s;
     }
     input[type=range] {
       width: 100%;
@@ -62,7 +61,6 @@
       font-size: 0.8em;
       color: #888;
     }
-  
     .rewind {
       font-size: 1.5rem;
       margin: 2rem 0;
@@ -83,142 +81,137 @@
       from { text-shadow: 0 0 5px #ff3300, 0 0 10px #ff3300; }
       to { text-shadow: 0 0 15px #ff6600, 0 0 30px #ff6600; }
     }
-</style>
-<script>
-  const gshibaToDollar = 0.000005;             // Prezzo simulato GSHIBA in $
-  const rewardPer5Dollars = 0.000001;           // Ricompensa: 0.000001 SOL ogni 5$
-  let solToUSD = 136.93;                        // Prezzo iniziale SOL
+  </style>
+  <script>
+    const gshibaToDollar = 0.000005;
+    const rewardPer5Dollars = 0.000001;
+    let solToUSD = 136.93;
 
-  // === 1. Prezzo SOL in tempo reale da CoinGecko ===
-  async function fetchSolPrice() {
-    try {
-      const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd");
-      const data = await res.json();
-      solToUSD = data.solana.usd;
-      updateReward();
-    } catch (err) {
-      console.error("Errore nel recupero del prezzo di SOL:", err);
+    async function fetchSolPrice() {
+      try {
+        const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd");
+        const data = await res.json();
+        solToUSD = data.solana.usd;
+        updateReward();
+      } catch (err) {
+        console.error("Errore nel recupero del prezzo di SOL:", err);
+      }
     }
-  }
-  fetchSolPrice();
-  setInterval(fetchSolPrice, 60000);
 
-  // === 2. Calcolo reward ===
-  function formatNum(n, d = 6) {
-    return parseFloat(n).toLocaleString(undefined, { maximumFractionDigits: d });
-  }
+    fetchSolPrice();
+    setInterval(fetchSolPrice, 60000);
 
-  function updateReward() {
-    const amount = parseInt(document.getElementById("amount").value);
-    const usdValue = amount * gshibaToDollar;
-    const solPer5min = (usdValue / 5) * rewardPer5Dollars;
-    const usdPer5min = solPer5min * solToUSD;
-    const solPerMonth = solPer5min * 288 * 30;
-    const usdPerMonth = usdPer5min * 288 * 30;
-
-    document.getElementById("amountVal").innerText = amount.toLocaleString();
-    document.getElementById("rewardVal").innerText = formatNum(solPer5min) + " SOL / 5 min";
-
-    const usdElem = document.getElementById("usdVal");
-    if (usdElem) usdElem.innerText = "~ $" + formatNum(usdPer5min, 8);
-
-    const monthlyElem = document.getElementById("monthlyVal");
-    if (monthlyElem) monthlyElem.innerText =
-      formatNum(solPerMonth) + " SOL / month (~ $" + formatNum(usdPerMonth, 2) + ")";
-  }
-
-  // === 3. REWIND dinamico ===
-  function updateRewindText() {
-    const text = document.getElementById("rewindText");
-    if (!text) return;
-    const dots = ".".repeat((Date.now() / 500 % 4) | 0);
-    text.innerText = "REWINDING EVERY 5 MINUTES" + dots;
-  }
-  setInterval(updateRewindText, 500);
-
-  // === 4. Holders live da Birdeye ===
-  async function fetchHolders() {
-    try {
-      const res = await fetch("https://public-api.birdeye.so/public/token/holders?address=4yiDg6RzLzMiChYZRkS7Xvurbzyw9fajJZCxGgBPiWWM", {
-        headers: { "X-API-KEY": "public" }
-      });
-      const data = await res.json();
-      const holders = data.data.total;
-      document.getElementById("holderCount").innerText = holders.toLocaleString();
-    } catch (err) {
-      console.error("Errore nel fetch holders:", err);
-      document.getElementById("holderCount").innerText = "Unavailable";
+    function formatNum(n, d = 6) {
+      return parseFloat(n).toLocaleString(undefined, { maximumFractionDigits: d });
     }
-  }
-  fetchHolders();
-  setInterval(fetchHolders, 60000);
-</script>
-</script>
+
+    function updateReward() {
+      const amount = parseInt(document.getElementById("amount").value);
+      const usdValue = amount * gshibaToDollar;
+      const solPer5min = (usdValue / 5) * rewardPer5Dollars;
+      const usdPer5min = solPer5min * solToUSD;
+      const solPerMonth = solPer5min * 288 * 30;
+      const usdPerMonth = usdPer5min * 288 * 30;
+
+      document.getElementById("amountVal").innerText = amount.toLocaleString();
+      document.getElementById("rewardVal").innerText = formatNum(solPer5min) + " SOL / 5 min";
+
+      const usdElem = document.getElementById("usdVal");
+      if (usdElem) usdElem.innerText = "~ $" + formatNum(usdPer5min, 8);
+
+      const monthlyElem = document.getElementById("monthlyVal");
+      if (monthlyElem) monthlyElem.innerText = formatNum(solPerMonth) + " SOL / month (~ $" + formatNum(usdPerMonth, 2) + ")";
+    }
+
+    function updateRewindText() {
+      const text = document.getElementById("rewindText");
+      if (!text) return;
+      const dots = ".".repeat((Date.now() / 500 % 4) | 0);
+      text.innerText = "REWINDING EVERY 5 MINUTES" + dots;
+    }
+    setInterval(updateRewindText, 500);
+
+    async function fetchHolders() {
+      try {
+        const res = await fetch("https://public-api.birdeye.so/public/token/holders?address=4yiDg6RzLzMiChYZRkS7Xvurbzyw9fajJZCxGgBPiWWM", {
+          headers: { "X-API-KEY": "public" }
+        });
+        const data = await res.json();
+        const holders = data.data.total;
+        document.getElementById("holderCount").innerText = holders.toLocaleString();
+      } catch (err) {
+        console.error("Errore nel fetch holders:", err);
+        document.getElementById("holderCount").innerText = "Unavailable";
+      }
+    }
+
+    fetchHolders();
+    setInterval(fetchHolders, 60000);
+  </script>
 </head>
 <body onload="updateReward()">
-<div class="container">
-<img alt="Logo" class="logo" src="logo.png"/>
-<h1>GrumpyShiba Coin</h1>
-<h2 class="matrix-title"> $GSHIBA </h2>
-<p>Earn Solana rewards every 5 minutes just by holding $GSHIBA</p>
-<a class="button" href="https://jup.ag/tokens/4yiDg6RzLzMiChYZRkS7Xvurbzyw9fajJZCxGgBPiWWM" target="_blank">Buy Now</a>
-<a class="button" href="https://birdeye.so/token/4yiDg6RzLzMiChYZRkS7Xvurbzyw9fajJZCxGgBPiWWM?chain=solana" target="_blank">Chart</a>
-<a class="button" href="https://t.me/GrumpyShibaOfficial" target="_blank">Telegram</a>
-<a class="button" href="https://x.com/GrumpyShibaoff" target="_blank">X</a>
-<div class="rewind" id="rewindText">REWINDING EVERY 5 MINUTES...</div><div class="section">
-<h2 class="matrix-title">[How_It_Works]</h2>
-<ul style="text-align: left; max-width: 500px; margin: auto;">
-<li>&gt; 10% tax is collected from every buy and sell transaction</li>
-<li>&gt; Tax is automatically converted to Solana</li>
-<li>&gt; Smart contract distributes Solana to all holders every 5 minutes</li>
-<li>&gt; Rewards are proportional to your token holdings</li>
-</ul>
-</div>
-<div class="section">
-  <h2>Rewards Calculator</h2>
-  <p>Slide to simulate your $GSHIBA holdings:</p>
+  <div class="container">
+    <img alt="Logo" class="logo" src="logo.png"/>
+    <h1>GrumpyShiba Coin</h1>
+    <h2 class="matrix-title"> $GSHIBA </h2>
+    <p>Earn Solana rewards every 5 minutes just by holding $GSHIBA</p>
+    <a class="button" href="https://jup.ag/tokens/4yiDg6RzLzMiChYZRkS7Xvurbzyw9fajJZCxGgBPiWWM" target="_blank">Buy Now</a>
+    <a class="button" href="https://birdeye.so/token/4yiDg6RzLzMiChYZRkS7Xvurbzyw9fajJZCxGgBPiWWM?chain=solana" target="_blank">Chart</a>
+    <a class="button" href="https://t.me/GrumpyShibaOfficial" target="_blank">Telegram</a>
+    <a class="button" href="https://x.com/GrumpyShibaoff" target="_blank">X</a>
 
-  <!-- SLIDER -->
-  <input id="amount" type="range" min="1000000" max="100000000" step="10000" oninput="updateReward()">
+    <div class="rewind" id="rewindText">REWINDING EVERY 5 MINUTES...</div>
 
-  <!-- RISULTATI -->
-  <p>
-    Holding: <span id="amountVal" class="highlight"></span> $GSHIBA
-  </p>
-  <p>
-    Reward Every 5 Minutes: <span id="rewardVal" class="highlight"></span>  
-    <br><span id="usdVal" class="highlight"></span>
-  </p>
-  <p>
-    Monthly Projection: <span id="monthlyVal" class="highlight"></span>
-  </p>
-</div>
-<div class="section">
-  <h2>Live Holders</h2>
-  <p>Current number of $GSHIBA holders:</p>
-  <p class="highlight" id="holderCount">Loading...</p>
-</div>
-<div class="section">
-<h2 class="matrix-title">Tokenomics</h2>
-<p>Total Supply: 1,000,000,000 $GSHIBA</p>
-<p>80% Liquidity | 10% Rewards | 5% Dev | 5% Marketing</p>
-</div>
-<div class="section">
-<h2 class="matrix-title">Fair Launch</h2>
-<p>No presale. No VC. 100% Community-driven.</p>
-</div>
-<div class="section">
-<h2 class="matrix-title">Community Owned</h2>
-<p>GrumpyShiba belongs to the people. Hold, earn, and meme together.</p>
-</div>
-<div class="section">
-<h2 class="matrix-title">SYSTEM.REWARDS</h2>
-<h3>Automatic Distribution</h3>
-<p>The 10% tax on transactions is automatically converted to Solana and distributed to all holders every 5 minutes. This creates a passive income stream just by holding $GSHIBA tokens in your wallet.</p>
-</div>
-<footer>
-      —2025 GrumpyShiba Coin Project- $GSHIBA TOKEN
+    <div class="section">
+      <h2 class="matrix-title">[How_It_Works]</h2>
+      <ul style="text-align: left; max-width: 500px; margin: auto;">
+        <li>&gt; 10% tax is collected from every buy and sell transaction</li>
+        <li>&gt; Tax is automatically converted to Solana</li>
+        <li>&gt; Smart contract distributes Solana to all holders every 5 minutes</li>
+        <li>&gt; Rewards are proportional to your token holdings</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Rewards Calculator</h2>
+      <p>Slide to simulate your $GSHIBA holdings:</p>
+      <input id="amount" type="range" min="1000000" max="100000000" step="10000" oninput="updateReward()">
+      <p>Holding: <span id="amountVal" class="highlight"></span> $GSHIBA</p>
+      <p>Reward Every 5 Minutes: <span id="rewardVal" class="highlight"></span><br><span id="usdVal" class="highlight"></span></p>
+      <p>Monthly Projection: <span id="monthlyVal" class="highlight"></span></p>
+    </div>
+
+    <div class="section">
+      <h2 class="matrix-title">Live Holders</h2>
+      <p>Current number of $GSHIBA holders:</p>
+      <p class="highlight" id="holderCount">Loading...</p>
+    </div>
+
+    <div class="section">
+      <h2 class="matrix-title">Tokenomics</h2>
+      <p>Total Supply: 1,000,000,000 $GSHIBA</p>
+      <p>80% Liquidity | 10% Rewards | 5% Dev | 5% Marketing</p>
+    </div>
+
+    <div class="section">
+      <h2 class="matrix-title">Fair Launch</h2>
+      <p>No presale. No VC. 100% Community-driven.</p>
+    </div>
+
+    <div class="section">
+      <h2 class="matrix-title">Community Owned</h2>
+      <p>GrumpyShiba belongs to the people. Hold, earn, and meme together.</p>
+    </div>
+
+    <div class="section">
+      <h2 class="matrix-title">SYSTEM.REWARDS</h2>
+      <h3>Automatic Distribution</h3>
+      <p>The 10% tax on transactions is automatically converted to Solana and distributed to all holders every 5 minutes. This creates a passive income stream just by holding $GSHIBA tokens in your wallet.</p>
+    </div>
+
+    <footer>
+      —2025 GrumpyShiba Coin Project — $GSHIBA TOKEN
     </footer>
-</div>
+  </div>
 </body>
 </html>
