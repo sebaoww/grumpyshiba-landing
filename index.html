@@ -115,12 +115,8 @@
 
       document.getElementById("amountVal").innerText = amount.toLocaleString();
       document.getElementById("rewardVal").innerText = formatNum(solPer5min) + " SOL / 5 min";
-
-      const usdElem = document.getElementById("usdVal");
-      if (usdElem) usdElem.innerText = "~ $" + formatNum(usdPer5min, 8);
-
-      const monthlyElem = document.getElementById("monthlyVal");
-      if (monthlyElem) monthlyElem.innerText = formatNum(solPerMonth) + " SOL / month (~ $" + formatNum(usdPerMonth, 2) + ")";
+      document.getElementById("usdVal").innerText = "~ $" + formatNum(usdPer5min, 8);
+      document.getElementById("monthlyVal").innerText = formatNum(solPerMonth) + " SOL / month (~ $" + formatNum(usdPerMonth, 2) + ")";
     }
 
     function updateRewindText() {
@@ -133,11 +129,9 @@
 
     async function fetchHolders() {
       try {
-        const res = await fetch("https://public-api.birdeye.so/public/token/holders?address=tKVGfxUQkJNq8erH7o6rA7t177goR9NvCZTieoTRSgk", {
-          headers: { "X-API-KEY": "public" }
-        });
+        const res = await fetch("https://api.geckoterminal.com/api/v2/networks/solana/tokens/tKVGfxUQkJNq8erH7o6rA7t177goR9NvCZTieoTRSgk");
         const data = await res.json();
-        const holders = data?.data?.total ?? 0;
+        const holders = data?.data?.attributes?.holders ?? 0;
         document.getElementById("holderCount").innerText = holders.toLocaleString();
       } catch (err) {
         console.error("Errore nel fetch holders:", err);
@@ -153,8 +147,9 @@
   <div class="container">
     <img alt="Logo" class="logo" src="https://bronze-decisive-bison-807.mypinata.cloud/ipfs/bafybeiheunbptro3ovclreuxhbf4jdjqifax6rkpxqm6qeq3z4q3yyuvke"/>
     <h1>GrumpyShiba Coin</h1>
-    <h2 class="matrix-title"> $GSHIBA </h2>
+    <h2 class="matrix-title">$GSHIBA</h2>
     <p>Earn Solana rewards every 5 minutes just by holding $GSHIBA</p>
+
     <a class="button" href="https://jup.ag/tokens/tKVGfxUQkJNq8erH7o6rA7t177goR9NvCZTieoTRSgk" target="_blank">Buy Now</a>
     <a class="button" href="https://birdeye.so/token/tKVGfxUQkJNq8erH7o6rA7t177goR9NvCZTieoTRSgk?chain=solana" target="_blank">Chart</a>
     <a class="button" href="https://t.me/GrumpyShibaOfficial" target="_blank">Telegram</a>
@@ -210,7 +205,7 @@
     </div>
 
     <footer>
-      —2025 GrumpyShiba Coin Project — $GSHIBA TOKEN
+      2025 GrumpyShiba Coin Project — $GSHIBA TOKEN
     </footer>
   </div>
 </body>
