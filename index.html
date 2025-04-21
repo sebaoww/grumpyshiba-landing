@@ -81,6 +81,24 @@
       from { text-shadow: 0 0 5px #ff3300, 0 0 10px #ff3300; }
       to { text-shadow: 0 0 15px #ff6600, 0 0 30px #ff6600; }
     }
+
+    /* LOGO GECKOTERMINAL IN BASSO A SINISTRA */
+    #gecko-logo {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 999;
+    }
+
+    #gecko-logo img {
+      height: 40px;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
+
+    #gecko-logo img:hover {
+      opacity: 1;
+    }
   </style>
   <script>
     const gshibaToDollar = 0.000005;
@@ -207,6 +225,13 @@
     <footer>
       2025 GrumpyShiba Coin Project — $GSHIBA TOKEN
     </footer>
+  </div>
+
+  <!-- GeckoTerminal Logo in basso a sinistra -->
+  <div id="gecko-logo">
+    <a href="https://www.geckoterminal.com/solana/pools/4e9XAvAzKiu3BEoUhMorzk5t6CjdxWKtvW2KvGvfCUGH" target="_blank" rel="noopener noreferrer">
+      <img src="https://teal-efficient-beaver-393.mypinata.cloud/ipfs/bafkreiakjgqn2e6l5koj35jmoutgukftxlwd5j5fomqaoakgth5y2uat4y" alt="GeckoTerminal" />
+    </a>
   </div>
 </body>
 </html>
